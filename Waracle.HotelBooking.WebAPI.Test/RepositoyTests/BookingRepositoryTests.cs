@@ -27,9 +27,14 @@ public class BookingRepositoryTests
     [TestMethod]
     public async Task GetAvailableRooms_ShouldReturnRooms_WhenAvailable()
     {
+
+        var hotel = await _repository.FindHotelByName("Alpha");
+        hotel.Should().NotBeNull();
+
+
         var start = DateTime.Today.AddDays(1);
         var end = start.AddDays(2);
-        var rooms = await _repository.GetAvailableRooms(start, end, guests: 2);
+        var rooms = await _repository.GetAvailableRooms(hotel.Id, start, end, guests: 2);
 
         rooms.Should().NotBeEmpty();
         rooms.All(r => r.Capacity >= 2).Should().BeTrue();
@@ -50,11 +55,15 @@ public class BookingRepositoryTests
     [TestMethod]
     public async Task CreateBooking_ShouldReturnNull_WhenNoRoomAvailable()
     {
+
+        var hotel = await _repository.FindHotelByName("Alpha");
+        hotel.Should().NotBeNull();
+
         var start = DateTime.Today.AddDays(5);
         var end = start.AddDays(2);
 
         // Fill all rooms with overlapping bookings
-        var rooms = await _repository.GetAvailableRooms(start, end, guests: 2);
+        var rooms = await _repository.GetAvailableRooms(hotel.Id, start, end, guests: 2);
         foreach (var room in rooms)
         {
             _context.Bookings.Add(new Booking

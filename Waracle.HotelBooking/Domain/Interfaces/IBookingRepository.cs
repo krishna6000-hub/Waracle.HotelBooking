@@ -9,10 +9,10 @@ namespace Waracle.HotelBooking.Domain.Interfaces
 {
     public interface IBookingRepository
     {
-        Task<List<Room>> GetAvailableRooms(DateTime start, DateTime end, int guests);
+        Task<List<Room>> GetAvailableRooms(int hotelid, DateTime start, DateTime end, int guests);
         Task<Booking?> CreateBooking(int hotelId, DateTime start, DateTime end, int guests);
         Task<Booking?> GetBookingByReference(string reference);
-        Task<Hotel> FindHotelByName(string name);
+        Task<Hotel?> FindHotelByName(string name);
     }
 
 }

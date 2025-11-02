@@ -7,8 +7,6 @@ namespace Waracle.HotelBooking.Infrastructure.DbContext
     /// <summary>
     /// EF Core DB Context
     /// </summary>
-
-
     public class AppDbContext : Microsoft.EntityFrameworkCore.DbContext
     {
         public DbSet<Hotel> Hotels => Set<Hotel>();
@@ -20,10 +18,9 @@ namespace Waracle.HotelBooking.Infrastructure.DbContext
           
         }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // set-up referential integrety constaints between defined EF entities
+            // set-up referential integrity constaints between defined EF entities
 
             modelBuilder.Entity<Hotel>().HasMany(h => h.Rooms).WithOne(r => r.Hotel).HasForeignKey(r => r.HotelId);
             modelBuilder.Entity<Room>().HasMany(r => r.Bookings).WithOne(b => b.Room).HasForeignKey(b => b.RoomId);

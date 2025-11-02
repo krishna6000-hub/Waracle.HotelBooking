@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -25,16 +26,29 @@ public class HotelsControllerTests
         _client = factory.CreateClient();
     }
 
- 
+
+    [TestInitialize]
+    public async Task ReseedDB()
+    {
+
+        // Seed
+        var seedResponse = await _client.PostAsync("/api/admin/seed", null);
+
+    }
+
+    [TestCleanup]
+    public async Task ResetDB()
+    {
+        // reset
+        var resetResponse = await _client.PostAsync("/api/admin/reset", null);
+
+    }
+
 
 
     [TestMethod]
     public async Task FindHotelByName_ShouldReturnHotel_WhenExists()
     {
-
-        // Seed
-        var seedResponse = await _client.PostAsync("/api/admin/seed", null);
-        seedResponse.StatusCode.Should().Be(HttpStatusCode.OK);
 
 
 
@@ -45,24 +59,16 @@ public class HotelsControllerTests
         content.Should().Contain("Alpha");
 
 
-        // reset
-        var resetResponse = await _client.PostAsync("/api/admin/reset", null);
-        resetResponse.StatusCode.Should().Be(HttpStatusCode.OK);
     }
 
     [TestMethod]
     public async Task FindHotelByName_ShouldReturnNotFound_WhenMissing()
     {
 
-        // Seed
-        var seedResponse = await _client.PostAsync("/api/admin/seed", null);
-        seedResponse.StatusCode.Should().Be(HttpStatusCode.OK);
-
         var response = await _client.GetAsync("/api/hotels/search?name=UnknownHotel");
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
 
-        // reset
-        var resetResponse = await _client.PostAsync("/api/admin/reset", null);
-        resetResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+        
+      
     }
 }

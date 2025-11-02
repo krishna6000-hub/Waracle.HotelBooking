@@ -42,7 +42,7 @@ namespace Waracle.HotelBooking.WebAPI.Controllers
         public async Task<IActionResult> GetAvailableRooms(int hotelId, DateTime start, DateTime end, int guests)
         {
 
-            var available = await _bookingService.GetAvailableRooms(start, end, guests);
+            var available = await _bookingService.GetAvailableRooms(hotelId, start, end, guests);
 
             return Ok(available);
         }

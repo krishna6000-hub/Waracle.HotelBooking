@@ -6,7 +6,6 @@ using Waracle.HotelBooking.Services;
 using Waracle.HotelBooking.Domain.Interfaces;
 using Waracle.HotelBooking.Infrastructure.DbContext;
 
-
 namespace Waracle.HotelBooking.WebAPI
 {
     public class Program
@@ -17,25 +16,16 @@ namespace Waracle.HotelBooking.WebAPI
 
             // Add services to the container.
             builder.Services.AddEndpointsApiExplorer();
-
             builder.Services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HotelBookingAPI", Version = "v1" });
             });
             builder.Services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi(options =>
-            {
-
-
-            });
 
             builder.Services.AddDbContextPool<AppDbContext>(options =>
             {
                 //options.UseInMemoryDatabase("Developer");
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Waracle.HotelBooking.WebAPI"));
-
-
             });
             
             builder.Services.AddScoped<IBookingService, BookingService>();
@@ -46,19 +36,14 @@ namespace Waracle.HotelBooking.WebAPI
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.MapOpenApi();
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "HotelBookingAPI v1");
+                });
             }
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "HotelBookingAPI v1");
-            });
-
-            app.UseAuthorization();
-
-
+          
             app.MapControllers();
-
             app.Run();
         }
     }

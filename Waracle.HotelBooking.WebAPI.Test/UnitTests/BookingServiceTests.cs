@@ -34,9 +34,12 @@ namespace Waracle.HotelBooking.WebAPI.Test.UnitTests
         [TestMethod]
         public async Task GetAvailableRooms_ShouldReturnRooms_WhenAvailable()
         {
+            var hotel = await _repository.FindHotelByName("Alpha");
+            hotel.Should().NotBeNull();
+
             var start = DateTime.Today.AddDays(1);
             var end = start.AddDays(2);
-            var rooms = await _service.GetAvailableRooms(start, end, guests: 2);
+            var rooms = await _service.GetAvailableRooms(hotel.Id, start, end, guests: 2);
 
             rooms.Should().NotBeEmpty();
             rooms.All(r => r.Capacity >= 2).Should().BeTrue();
@@ -57,11 +60,15 @@ namespace Waracle.HotelBooking.WebAPI.Test.UnitTests
         [TestMethod]
         public async Task BookRoom_ShouldReturnNull_WhenNoRoomAvailable()
         {
+
+            var hotel = await _repository.FindHotelByName("Alpha");
+            hotel.Should().NotBeNull();
+
             var start = DateTime.Today.AddDays(5);
             var end = start.AddDays(2);
 
             // Fill all rooms with overlapping bookings
-            var rooms = await _service.GetAvailableRooms(start, end, guests: 2);
+            var rooms = await _service.GetAvailableRooms(hotel.Id, start, end, guests: 2);
             foreach (var room in rooms)
             {
                 _context.Bookings.Add(new Booking

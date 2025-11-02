@@ -12,7 +12,7 @@ using Waracle.HotelBooking.Infrastructure.DbContext;
 namespace Waracle.HotelBooking.WebAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251102143408_InitialCreate")]
+    [Migration("20251102173327_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

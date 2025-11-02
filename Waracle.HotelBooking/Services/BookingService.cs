@@ -15,8 +15,8 @@ namespace Waracle.HotelBooking.Services
             _repository = repository;
         }
 
-        public Task<List<Room>> GetAvailableRooms(DateTime start, DateTime end, int guests)
-            => _repository.GetAvailableRooms(start, end, guests);
+        public Task<List<Room>> GetAvailableRooms(int hotelId, DateTime start, DateTime end, int guests)
+            => _repository.GetAvailableRooms(hotelId, start, end, guests);
 
         public Task<Booking?> BookRoom(int hotelId, DateTime start, DateTime end, int guests)
             => _repository.CreateBooking(hotelId, start, end, guests);

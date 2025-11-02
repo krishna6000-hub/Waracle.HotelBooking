@@ -18,10 +18,10 @@ public class BookingsController : ControllerBase
     /// </summary>
     [ProducesResponseType(StatusCodes.Status200OK)]
     [HttpGet("{hotelId}/available-rooms/{start}/{end}/{guests}")]
-    public async Task<IActionResult> GetAvailableRooms(DateTime start, DateTime end, int guests)
+    public async Task<IActionResult> GetAvailableRooms(int hotelId, DateTime start, DateTime end, int guests)
     {
-        var rooms = await _bookingService.GetAvailableRooms(start, end, guests);
-        return Ok(rooms);
+      var rooms = await _bookingService.GetAvailableRooms(hotelId, start, end, guests);
+      return Ok(rooms);
     }
 
 

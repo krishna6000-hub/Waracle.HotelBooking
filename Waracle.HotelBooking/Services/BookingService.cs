@@ -14,10 +14,25 @@ namespace Waracle.HotelBooking.Services
         }
 
         public Task<List<Room>> GetAvailableRooms(int hotelId, DateTime start, DateTime end, int guests)
-            => _repository.GetAvailableRooms(hotelId, start, end, guests);
+        {
+            if ((end-start).Days<=0)
+            {
+                throw new ArgumentException("End date must be after the start date");
+            }
+
+            return _repository.GetAvailableRooms(hotelId, start, end, guests); 
+        }
 
         public Task<Booking?> BookRoom(int hotelId, DateTime start, DateTime end, int guests)
-            => _repository.CreateBooking(hotelId, start, end, guests);
+        {
+            if ((end - start).Days <= 0)
+            {
+                throw new ArgumentException("End date must be after the start date");
+            }
+
+            return _repository.CreateBooking(hotelId, start, end, guests);
+
+        } 
 
         public Task<Booking?> GetBookingByReference(string reference)
             => _repository.GetBookingByReference(reference);

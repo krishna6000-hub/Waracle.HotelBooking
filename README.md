@@ -26,6 +26,14 @@ Business Functionality
 
 # Completed by Krishna Reddy
 
+SwaggerUI Documentation Link:
+
+https://hotelbookingsystem-esc8fjfdeyd5c2h3.uksouth-01.azurewebsites.net/swagger/index.html
+
+Swagger JSON Endpoint:
+
+https://hotelbookingsystem-esc8fjfdeyd5c2h3.uksouth-01.azurewebsites.net/swagger/v1/swagger.json
+
 This isolated function  
 
 The function has the following requirements

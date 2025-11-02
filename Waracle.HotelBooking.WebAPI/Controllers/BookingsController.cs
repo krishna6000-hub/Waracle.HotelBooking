@@ -20,8 +20,18 @@ public class BookingsController : ControllerBase
     [HttpGet("{hotelId}/available-rooms/{start}/{end}/{guests}")]
     public async Task<IActionResult> GetAvailableRooms(int hotelId, DateTime start, DateTime end, int guests)
     {
-        var rooms = await _bookingService.GetAvailableRooms(hotelId, start, end, guests);
-        return Ok(rooms);
+
+        try 
+        {
+            var rooms = await _bookingService.GetAvailableRooms(hotelId, start, end, guests);
+
+            return Ok(rooms);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+       
     }
 
 
@@ -34,8 +44,15 @@ public class BookingsController : ControllerBase
 
     public async Task<IActionResult> BookRoom([FromBody] BookingRequestDto request)
     {
-        var booking = await _bookingService.BookRoom(request.HotelId, request.StartDate, request.EndDate, request.GuestCount);
-        return booking == null ? BadRequest("No available room found.") : Ok(booking);
+        try
+        {
+            var booking = await _bookingService.BookRoom(request.HotelId, request.StartDate, request.EndDate, request.GuestCount);
+            return booking == null ? BadRequest("No available room found.") : Ok(booking);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
 

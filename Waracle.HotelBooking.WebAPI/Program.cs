@@ -2,9 +2,9 @@
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Waracle.HotelBooking.Services;
 using Waracle.HotelBooking.Domain.Interfaces;
 using Waracle.HotelBooking.Infrastructure.DbContext;
+using Waracle.HotelBooking.Services;
 
 namespace Waracle.HotelBooking.WebAPI
 {
@@ -27,22 +27,21 @@ namespace Waracle.HotelBooking.WebAPI
                 //options.UseInMemoryDatabase("Developer");
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Waracle.HotelBooking.WebAPI"));
             });
-            
+
             builder.Services.AddScoped<IBookingService, BookingService>();
             builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
             {
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "HotelBookingAPI v1");
-                });
-            }
-          
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "HotelBookingAPI v1");
+            });
+
+
             app.MapControllers();
             app.Run();
         }

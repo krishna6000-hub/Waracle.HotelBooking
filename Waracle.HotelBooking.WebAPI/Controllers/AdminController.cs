@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Waracle.HotelBooking.Infrastructure.DbContext;
 using Waracle.HotelBooking.Helpers;
+using Waracle.HotelBooking.Infrastructure.DbContext;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,7 +25,7 @@ namespace Waracle.HotelBooking.WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Seed()
         {
-           
+
             SeedData.Seed(_context);
             return Ok("Database seeded.");
         }

@@ -14,12 +14,12 @@ public class BookingsControllerTests
     private static HttpClient _client;
 
     [ClassInitialize]
-    public  static void Setup(TestContext context)
+    public static void Setup(TestContext context)
     {
         var factory = new WebApplicationFactory<Program>();
         _client = factory.CreateClient();
 
-      
+
     }
 
     [TestInitialize]
@@ -27,6 +27,8 @@ public class BookingsControllerTests
     {
         // reset
         var resetResponse = await _client.PostAsync("/api/admin/reset", null);
+
+        Task.Delay(2000).Wait();
 
         // Seed
         var seedResponse = await _client.PostAsync("/api/admin/seed", null);
@@ -48,12 +50,12 @@ public class BookingsControllerTests
         var response = await _client.GetAsync($"/api/bookings/{hotel.Id}/available-rooms/2025-11-10/2025-11-12/3");
         response.StatusCode.Should().Be(HttpStatusCode.OK);
 
-       
+
         var availableRooms = await response.Content.ReadFromJsonAsync<List<Room>>();
         availableRooms.Should().NotBeNull();
         availableRooms.Count.Should().Be(2);
 
-    
+
     }
 
     [TestMethod]
@@ -90,12 +92,12 @@ public class BookingsControllerTests
     public async Task BookRoom_ShouldReturnBooking_WhenSuccessful()
     {
 
-        
-        
+
         var resp = await _client.GetAsync("api/hotels/search?name=Alpha");
+
         resp.StatusCode.Should().Be(HttpStatusCode.OK);
         var hotel = await resp.Content.ReadFromJsonAsync<Hotel>();
-       
+
 
         var bookingRequest = new
         {
@@ -106,8 +108,11 @@ public class BookingsControllerTests
         };
 
 
-   
+
         var response = await _client.PostAsJsonAsync("api/bookings/book", bookingRequest);
+
+
+
         response.StatusCode.Should().Be(HttpStatusCode.OK);
 
         var content = await response.Content.ReadAsStringAsync();

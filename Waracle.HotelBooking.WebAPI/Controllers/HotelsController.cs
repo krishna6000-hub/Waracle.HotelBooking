@@ -38,7 +38,7 @@ namespace Waracle.HotelBooking.WebAPI.Controllers
         /// </summary>
         [HttpGet("available")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-     
+
         public async Task<IActionResult> GetAvailableRooms(int hotelId, DateTime start, DateTime end, int guests)
         {
 

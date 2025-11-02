@@ -8,7 +8,7 @@ namespace Waracle.HotelBooking.Helpers
     {
         public static void Seed(AppDbContext context)
         {
-            
+
             if (context.Hotels.Any()) return;
 
             var hotelAlpha = new Hotel { Name = "Alpha" };
@@ -75,7 +75,7 @@ namespace Waracle.HotelBooking.Helpers
                 new Room { Type = RoomType.Double, Capacity = 2 },
                 new Room { Type = RoomType.Double, Capacity = 2 },
                 new Room { Type = RoomType.Double, Capacity = 2 },
-                new Room { Type = RoomType.Double, Capacity = 2 } 
+                new Room { Type = RoomType.Double, Capacity = 2 }
              };
 
             hotelEpsilon.Rooms = roomsEpsilon;
@@ -97,7 +97,7 @@ namespace Waracle.HotelBooking.Helpers
 
             context.SaveChanges();
 
-            
+
             /*
             var bookings = new List<Booking>
             {
@@ -122,6 +122,6 @@ namespace Waracle.HotelBooking.Helpers
             context.Rooms.RemoveRange(context.Rooms);
             context.Hotels.RemoveRange(context.Hotels);
             context.SaveChanges();
-        }  
+        }
     }
 }

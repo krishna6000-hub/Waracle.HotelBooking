@@ -1,9 +1,6 @@
 ﻿using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore;
 using System.Net;
-using Waracle.HotelBooking.Helpers;
-using Waracle.HotelBooking.Infrastructure.DbContext;
 
 namespace Waracle.HotelBooking.WebAPI.Test.ControllerTests;
 
@@ -19,11 +16,29 @@ public class AdminControllerTests
         _client = factory.CreateClient();
     }
 
+
+    [TestInitialize]
+    public async Task ReseedDB()
+    {
+
+        var response = await _client.PostAsync("/api/admin/seed", null);
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+        Task.Delay(2000).Wait();
+
+        var response2 = await _client.PostAsync("/api/admin/reset", null);
+        response2.StatusCode.Should().Be(HttpStatusCode.OK);
+
+    }
+
     [TestMethod]
     public async Task Reset_ShouldReturnOk()
     {
-        var response = await _client.PostAsync("/api/admin/reset", null);
-        response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+
+
+        var response2 = await _client.PostAsync("/api/admin/reset", null);
+        response2.StatusCode.Should().Be(HttpStatusCode.OK);
     }
 
 

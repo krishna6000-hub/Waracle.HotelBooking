@@ -17,7 +17,7 @@ public class BookingRepositoryTests
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .Options;
 
-      
+
         _context = new AppDbContext(options);
         SeedData.Reset(_context);
         SeedData.Seed(_context);

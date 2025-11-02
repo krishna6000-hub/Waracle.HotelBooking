@@ -1,6 +1,6 @@
-﻿using Waracle.HotelBooking.Domain.Models;
+﻿using FluentAssertions;
 using Waracle.HotelBooking.Domain.Definitions;
-using FluentAssertions;
+using Waracle.HotelBooking.Domain.Models;
 
 namespace Waracle.HotelBooking.WebAPI.Test.DomainTests;
 

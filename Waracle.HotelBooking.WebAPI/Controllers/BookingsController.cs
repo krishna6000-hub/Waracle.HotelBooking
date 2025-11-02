@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Waracle.HotelBooking.DTO;
 using Waracle.HotelBooking.Domain.Interfaces;
+using Waracle.HotelBooking.DTO;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -20,8 +20,8 @@ public class BookingsController : ControllerBase
     [HttpGet("{hotelId}/available-rooms/{start}/{end}/{guests}")]
     public async Task<IActionResult> GetAvailableRooms(int hotelId, DateTime start, DateTime end, int guests)
     {
-      var rooms = await _bookingService.GetAvailableRooms(hotelId, start, end, guests);
-      return Ok(rooms);
+        var rooms = await _bookingService.GetAvailableRooms(hotelId, start, end, guests);
+        return Ok(rooms);
     }
 
 
@@ -38,7 +38,7 @@ public class BookingsController : ControllerBase
         return booking == null ? BadRequest("No available room found.") : Ok(booking);
     }
 
-   
+
     /// <summary>
     /// Get booking details by reference.
     /// </summary>

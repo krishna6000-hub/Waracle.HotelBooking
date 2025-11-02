@@ -1,8 +1,7 @@
-﻿using Waracle.HotelBooking.Domain.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Waracle.HotelBooking.Domain.Interfaces;
 using Waracle.HotelBooking.Domain.Models;
 using Waracle.HotelBooking.Infrastructure.DbContext;
-using Microsoft.EntityFrameworkCore;
-using Waracle.HotelBooking.Helpers;
 public class BookingRepository : IBookingRepository
 {
     private readonly AppDbContext _context;
@@ -10,7 +9,7 @@ public class BookingRepository : IBookingRepository
     public BookingRepository(AppDbContext context)
     {
         _context = context;
-       // SeedData.Reset(_context);
+        // SeedData.Reset(_context);
         //SeedData.Seed(_context);
     }
 
@@ -18,11 +17,11 @@ public class BookingRepository : IBookingRepository
     {
         return await _context.Rooms
             .Include(r => r.Bookings)
-            .Where(r => r.Capacity >= guests &&  r.HotelId == hotelId &&
+            .Where(r => r.Capacity >= guests && r.HotelId == hotelId &&
                         !r.Bookings.Any(b =>
                             (start < b.EndDate && end > b.StartDate)))
             .ToListAsync();
-   
+
     }
 
     public async Task<Booking?> CreateBooking(int hotelId, DateTime start, DateTime end, int guests)
@@ -45,7 +44,7 @@ public class BookingRepository : IBookingRepository
         _context.Bookings.Add(booking);
         await _context.SaveChangesAsync();
 
-     
+
         return booking;
     }
 

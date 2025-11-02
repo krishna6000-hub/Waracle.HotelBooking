@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Waracle.HotelBooking.Domain.Models;
+﻿using Waracle.HotelBooking.Domain.Models;
 
 namespace Waracle.HotelBooking.Domain.Interfaces
 {

@@ -1,14 +1,6 @@
 ﻿using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Diagnostics;
 using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Waracle.HotelBooking.Helpers;
-using Waracle.HotelBooking.Infrastructure.DbContext;
-using Waracle.HotelBooking.Services;
 
 
 
@@ -68,7 +60,7 @@ public class HotelsControllerTests
         var response = await _client.GetAsync("/api/hotels/search?name=UnknownHotel");
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
 
-        
-      
+
+
     }
 }

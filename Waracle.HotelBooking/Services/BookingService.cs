@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Waracle.HotelBooking.Domain.Interfaces;
+﻿using Waracle.HotelBooking.Domain.Interfaces;
 using Waracle.HotelBooking.Domain.Models;
-using Waracle.HotelBooking.Infrastructure.DbContext;
 
 namespace Waracle.HotelBooking.Services
 {

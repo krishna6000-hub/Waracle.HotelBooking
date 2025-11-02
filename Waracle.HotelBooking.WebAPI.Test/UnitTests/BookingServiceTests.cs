@@ -1,10 +1,10 @@
 ﻿
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using Waracle.HotelBooking.Services;
 using Waracle.HotelBooking.Domain.Models;
 using Waracle.HotelBooking.Helpers;
 using Waracle.HotelBooking.Infrastructure.DbContext;
+using Waracle.HotelBooking.Services;
 
 namespace Waracle.HotelBooking.WebAPI.Test.UnitTests
 {
@@ -81,7 +81,7 @@ namespace Waracle.HotelBooking.WebAPI.Test.UnitTests
             }
             await _context.SaveChangesAsync();
 
-            var booking = await _service.BookRoom(hotelId: 1, start, end, guests: 2);
+            var booking = await _service.BookRoom(hotel.Id, start, end, guests: 2);
             booking.Should().BeNull();
         }
 

@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Waracle.HotelBooking.Domain.Models;
-using Waracle.HotelBooking.Helpers;
 
 namespace Waracle.HotelBooking.Infrastructure.DbContext
 {
@@ -13,9 +12,9 @@ namespace Waracle.HotelBooking.Infrastructure.DbContext
         public DbSet<Room> Rooms => Set<Room>();
         public DbSet<Booking> Bookings => Set<Booking>();
 
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) 
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-          
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

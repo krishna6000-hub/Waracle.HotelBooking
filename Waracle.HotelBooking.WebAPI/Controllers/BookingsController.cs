@@ -1,0 +1,53 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Waracle.HotelBooking.DTO;
+using Waracle.HotelBooking.Domain.Interfaces;
+
+[ApiController]
+[Route("api/[controller]")]
+public class BookingsController : ControllerBase
+{
+    private readonly IBookingService _bookingService;
+
+    public BookingsController(IBookingService bookingService)
+    {
+        _bookingService = bookingService;
+    }
+
+    /// <summary>
+    /// Get available rooms between two dates for a number of guests.
+    /// </summary>
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [HttpGet("{hotelId}/available-rooms/{start}/{end}/{guests}")]
+    public async Task<IActionResult> GetAvailableRooms(DateTime start, DateTime end, int guests)
+    {
+        var rooms = await _bookingService.GetAvailableRooms(start, end, guests);
+        return Ok(rooms);
+    }
+
+
+    /// <summary>
+    /// Book a room for a hotel.
+    /// </summary>
+    [HttpPost("book")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<IActionResult> BookRoom([FromBody] BookingRequestDto request)
+    {
+        var booking = await _bookingService.BookRoom(request.HotelId, request.StartDate, request.EndDate, request.GuestCount);
+        return booking == null ? BadRequest("No available room found.") : Ok(booking);
+    }
+
+   
+    /// <summary>
+    /// Get booking details by reference.
+    /// </summary>
+    [HttpGet("{reference}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetBookingByReference(string reference)
+    {
+        var booking = await _bookingService.GetBookingByReference(reference);
+        return booking == null ? NotFound() : Ok(booking);
+    }
+}

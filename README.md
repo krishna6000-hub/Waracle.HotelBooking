@@ -1,4 +1,4 @@
-﻿# Brief
+# Brief
 
 Create a hotel room booking API using ASP.NET Core and Entity Framework EF Core, 
 the solution must be written in C# following RESTful principles. 
@@ -60,7 +60,7 @@ https://hotelbookingsystem-esc8fjfdeyd5c2h3.uksouth-01.azurewebsites.net/swagger
   
   # Getting Started
   
-	- - Clone the repository to your local machine.
+  - Clone the repository to your local machine.
   - Navigate to the Waracle.HotelBooking.WebAPI project directory.
   - Run the application using `dotnet run`.
   - Access the Swagger UI at `https://localhost:{port}/swagger` to explore and test the API endpoints.

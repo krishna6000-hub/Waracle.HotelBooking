@@ -1,6 +1,6 @@
 # Brief
 
-Create a hotel room booking API using ASP.NET Core and Entity Framework EF Core, 
+Create a hotel room booking API using ASP.NET Core and Entity Framework EF Core, 
 the solution must be written in C# following RESTful principles. 
 
 # Business Rules 

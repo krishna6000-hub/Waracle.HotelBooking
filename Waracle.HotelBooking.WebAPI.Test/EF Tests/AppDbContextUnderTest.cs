@@ -5,7 +5,7 @@ using Waracle.HotelBooking.Domain.Models;
 using Waracle.HotelBooking.Infrastructure.DbContext;
 
 [TestClass]
-public class AppDbContextTests
+public class AppDbContextUnderTest
 {
     private AppDbContext _context = null!;
 

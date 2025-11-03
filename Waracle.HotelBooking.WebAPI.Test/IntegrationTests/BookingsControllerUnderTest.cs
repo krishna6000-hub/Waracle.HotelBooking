@@ -9,7 +9,7 @@ namespace Waracle.HotelBooking.WebAPI.Test.ControllerTests;
 
 
 [TestClass]
-public class BookingsControllerTests
+public class BookingsControllerUnderTest
 {
     private static HttpClient _client;
 

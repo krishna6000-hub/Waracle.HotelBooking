@@ -5,7 +5,7 @@ using Waracle.HotelBooking.Domain.Models;
 namespace Waracle.HotelBooking.WebAPI.Test.DomainTests;
 
 [TestClass]
-public class BookingTests
+public class BookingUnderTest
 {
     [TestMethod]
     public void Booking_ShouldGenerateReferenceAutomatically()

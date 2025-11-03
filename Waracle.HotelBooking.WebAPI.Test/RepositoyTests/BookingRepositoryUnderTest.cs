@@ -5,7 +5,7 @@ using Waracle.HotelBooking.Helpers;
 using Waracle.HotelBooking.Infrastructure.DbContext;
 
 [TestClass]
-public class BookingRepositoryTests
+public class BookingRepositoryUnderTest
 {
     private AppDbContext _context = null!;
     private BookingRepository _repository = null!;

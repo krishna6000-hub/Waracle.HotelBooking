@@ -7,7 +7,7 @@ using System.Net;
 namespace Waracle.HotelBooking.WebAPI.Test.ControllerTests;
 
 [TestClass]
-public class HotelsControllerTests
+public class HotelsControllerUnderTest
 {
     private static HttpClient _client;
 

@@ -11,7 +11,7 @@ namespace Waracle.HotelBooking.WebAPI.Test.UnitTests
 
 
     [TestClass]
-    public class BookingServiceTests
+    public class BookingServiceUnderTest
     {
         private AppDbContext _context = null!;
         private BookingRepository _repository = null!;

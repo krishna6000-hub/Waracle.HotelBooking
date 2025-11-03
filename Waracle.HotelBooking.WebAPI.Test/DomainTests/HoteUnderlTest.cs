@@ -4,7 +4,7 @@ using Waracle.HotelBooking.Domain.Models;
 namespace Waracle.HotelBooking.WebAPI.Test.DomainTests;
 
 [TestClass]
-public class HotelTests
+public class HoteUnderlTest
 {
     [TestMethod]
     public void Hotel_ShouldInitializeWithEmptyRoomList()

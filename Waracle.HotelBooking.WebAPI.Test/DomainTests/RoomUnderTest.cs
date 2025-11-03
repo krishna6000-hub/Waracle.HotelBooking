@@ -6,7 +6,7 @@ using Waracle.HotelBooking.Domain.Models;
 namespace Waracle.HotelBooking.WebAPI.Test.DomainTests;
 
 [TestClass]
-public class RoomTests
+public class RoomUnderTest
 {
     [TestMethod]
     public void Room_ShouldStoreTypeAndCapacity()
